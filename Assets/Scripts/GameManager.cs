@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private float alertLevel = 0.0f;
+    
     
 
     private void Start()
@@ -20,17 +20,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    private void IncreaseAlertLevel(float amount)
-    {
-        alertLevel += amount;
-        alertLevel = Mathf.Clamp(alertLevel, 0.0f, 100.0f);
-    }
-
-    private void DecreaseAlertLevel(float amount)
-    {
-        alertLevel -= amount;
-        alertLevel = Mathf.Clamp(alertLevel, 0.0f, 100.0f);
-    }
+    
 
     
 

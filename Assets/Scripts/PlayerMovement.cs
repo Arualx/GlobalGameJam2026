@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private float health = 100f;
+    private Slider healthBar;
 
     private float stamina = 100f;
     private float staminaTimer;
     private Slider staminaBar;
 
     private float playerSpeed;
-    private float playerRunSpeed = 5f;
-    private float playerWalkSpeed = 3f;
+    private float playerRunSpeed = 8f;
+    private float playerWalkSpeed = 5f;
 
     private float groundDrag = 6f;
     private bool isGrounded = false;
@@ -20,20 +22,22 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
 
-    private bool playerRunning = false;
+    public bool playerRunning = false;
 
     private float moveHorizontal;
     private float moveVertical;
     public Transform orientation;
     private Vector3 MovementDirection;
 
+    public PlayerLook playerLook;
 
     void Start()
     {
+        healthBar = GameObject.Find("HealthMeter").GetComponent<Slider>();
         staminaBar = GameObject.Find("StaminaMeter").GetComponent<Slider>();
         staminaBar.value = stamina;
         rb = GetComponent<Rigidbody>();
-        
+        playerLook = GameObject.Find("Main Camera").GetComponent<PlayerLook>();
     }
 
     //player movement
@@ -67,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && staminaBar.value > 0.0f && MovementDirection.magnitude > 0f)
         {
             playerSpeed = playerRunSpeed;
-            playerRunning = true;
+            playerRunning = true; 
         }
         else
         {
@@ -92,16 +96,25 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         
+        if (MovementDirection.magnitude > 0f)
+        {
+            playerLook.HeadMovement();
+        }
+        else
+        {
+            playerLook.StopHeadMovement();
+        }
 
     }
 
-    
-    
-
-    private void HeadMovement()
+    public void TakeDamage()
     {
-
+        Debug.Log("Player Took Damage");
+        health -= 10f;
+        health = Mathf.Clamp(health, 0.0f, 100.0f);
+        healthBar.value = health;
     }
+
     
     private void IncreaseStamina()
     {

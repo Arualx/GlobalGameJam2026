@@ -19,7 +19,7 @@ public class NPCFollowMovement : MonoBehaviour
     {
         playerHealth = GameObject.Find("Player").GetComponent<PlayerMovement>();
         playerTransform = GameObject.Find("Player").transform;
-        reflector = GameObject.Find("Reflector").GetComponent<ReflectorMovement>();
+        //reflector = GameObject.Find("Reflector").GetComponent<ReflectorMovement>();
 
     }
 

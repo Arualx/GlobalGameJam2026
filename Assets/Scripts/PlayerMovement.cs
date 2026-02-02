@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 MovementDirection;
 
     public PlayerLook playerLook;
+    public bool PlayerDead;
 
     void Start()
     {
@@ -113,6 +114,7 @@ public class PlayerMovement : MonoBehaviour
         health -= 10f;
         health = Mathf.Clamp(health, 0.0f, 100.0f);
         healthBar.value = health;
+        if (healthBar.value < 0.0f) PlayerDead = true;
     }
 
     
